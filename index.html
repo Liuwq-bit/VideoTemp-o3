@@ -32,7 +32,7 @@
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <!-- <link rel="icon" href="./static/images/favicon.svg"> -->
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -42,7 +42,7 @@
 </head>
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
       <span aria-hidden="true"></span>
@@ -79,8 +79,8 @@
       </div>
     </div> -->
 
-  </div>
-</nav>
+  <!-- </div>
+</nav> -->
 
 
 <section class="hero">
@@ -191,17 +191,19 @@
                   <span class="icon">
                       <i class="fab fa-github"></i>
                   </span>
-                  <span>Code</span>
+                  <!-- <span>Code</span> -->
+                  <span>Coming Soon</span>
                   </a>
               </span>
               <!-- Dataset Link. -->
               <span class="link-block">
-                <a href="https://huggingface.co/datasets/tbd"
+                <a href="https://huggingface.co/datasets"
                    class="external-link button is-normal is-rounded is-dark">
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Data</span>
+                  <!-- <span>Data</span> -->
+                  <span>Coming Soon</span>
                   </a>
             </div>
 
@@ -217,9 +219,7 @@
     <div class="hero-body">
       <img src="./static/images/main.png" alt="teaser" style="height:100%; width:100%; object-fit:contain;">
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
+        Illustration of the agentic pipeline in VideoTemp-o3. Given the video QA pair, it performs on-demand grounding and refines the initial rough segment. Finally, it produces a reliable answer grounded in the pertinent visual evidence.
       </h2>
     </div>
   </div>
@@ -257,61 +257,82 @@
 </section>
 
 
-<section class="hero teaser">
+<section class="section">
   <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Data Construction</h2>
+      </div>
+    </div>
+
     <div class="hero-body">
       <img src="./static/images/data_pipeline.png" alt="teaser" style="height:100%; width:100%; object-fit:contain;">
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
+        Multi-turn, multi-tool call data curation pipeline.
       </h2>
     </div>
-  </div>
-</section>
 
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
     <div class="hero-body">
       <div class="columns is-centered">
         <div class="column">
           <img src="./static/images/sft_data.png" alt="SFT Data" style="height:100%; width:100%; object-fit:contain;">
-          <h2 class="subtitle has-text-centered">
-            <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-            free-viewpoint
-            portraits.
-          </h2>
         </div>
         <div class="column">
           <img src="./static/images/rl_data.png" alt="RL Data" style="height:100%; width:100%; object-fit:contain;">
-          <h2 class="subtitle has-text-centered">
-            <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-            free-viewpoint
-            portraits.
-          </h2>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-
-
-<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <img src="./static/images/exp.png" alt="teaser" style="height:100%; width:100%; object-fit:contain;">
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
+        Data distribution of SFT data (left) and RL data (right).
       </h2>
     </div>
+
   </div>
 </section>
 
 
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Experiments</h2>
+      </div>
+    </div>
+
+    <h2 class="subtitle has-text-centered">
+      For fair comparisons, we ensure all methods use the same input resolution and maximum frames. <sup>†</sup> denotes reproduced results using official checkpoints. <b>Bold</b> and <u>underline</u> denotes the best and the second best results.
+    </h2>
+
+    <div class="hero-body">
+      <img src="./static/images/exp_1.png" alt="teaser" style="height:100%; width:100%; object-fit:contain;">
+      <h2 class="subtitle has-text-centered">
+        Main results on long video understanding benchmarks.
+      </h2>
+    </div>
+
+    <div class="hero-body">
+      <div class="columns is-centered">
+        <div class="column">
+          <img src="./static/images/exp_2.png" alt="Temporal Grounding" style="height:100%; width:100%; object-fit:contain;">
+        </div>
+        <div class="column">
+          <img src="./static/images/exp_3.png" alt="Video GQA" style="height:100%; width:100%; object-fit:contain;">
+        </div>
+      </div>
+      <h2 class="subtitle has-text-centered">
+        Results on temporal grounding (left) and video GQA (right) benchmarks.
+      </h2>
+    </div>
+
+    <div class="hero-body">
+      <img src="./static/images/exp_4.png" alt="teaser" style="height:100%; width:100%; object-fit:contain;">
+      <h2 class="subtitle has-text-centered">
+        Performance of temporal grounding (mIoU) and VideoQA (Acc) across various durations in VideoTemp-Bench.
+      </h2>
+    </div>
+
+  </div>
+</section>
 
 
 
