@@ -75,7 +75,10 @@ $(document).ready(function() {
 
     bulmaSlider.attach();
 
+});
 
+// Case dots – initialise as early as possible (independent of jQuery)
+document.addEventListener('DOMContentLoaded', function () {
   const cases = Array.from(document.querySelectorAll('#cases-wrapper [data-case]'));
   const dotsContainer = document.getElementById('cases-dots');
 
@@ -87,7 +90,6 @@ $(document).ready(function() {
     // If dots already exist in HTML, use them; otherwise create them dynamically
     var existingDots = dotsContainer.querySelectorAll('.case-dot');
     if (existingDots.length === 0) {
-      // Fallback: create dots dynamically if not pre-rendered in HTML
       cases.forEach(function (_, i) {
         var dot = document.createElement('span');
         dot.classList.add('case-dot');
@@ -115,7 +117,7 @@ $(document).ready(function() {
       animating = true;
 
       var oldIdx = idx;
-      var direction = newIdx > oldIdx ? 'left' : 'right'; // content slides left when going forward
+      var direction = newIdx > oldIdx ? 'left' : 'right';
       var oldCase = cases[oldIdx];
       var newCase = cases[newIdx];
 
