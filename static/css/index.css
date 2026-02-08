@@ -160,8 +160,95 @@ body {
   border-radius: 5px;
 }
 
-#cases-wrapper .case { display:none !important; }
-#cases-wrapper .case.is-active { display:block !important; }
+#cases-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+#cases-wrapper .case {
+  display: none;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+}
+
+#cases-wrapper .case.is-active {
+  display: block;
+}
+
+#cases-wrapper .case.slide-in-right {
+  display: block;
+  position: relative;
+  animation-name: slideInRight;
+}
+
+#cases-wrapper .case.slide-in-left {
+  display: block;
+  position: relative;
+  animation-name: slideInLeft;
+}
+
+#cases-wrapper .case.slide-out-right {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  animation-name: slideOutRight;
+}
+
+#cases-wrapper .case.slide-out-left {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  animation-name: slideOutLeft;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slideOutLeft {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
 
 /* Question box styling */
 .question-box {
@@ -372,4 +459,34 @@ body {
   .container.is-widescreen {
     max-width: 1440px;
   }
+}
+
+/* Case dot indicators */
+.cases-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 1rem 0 1.25rem;
+}
+
+.case-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #d1d5db;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.case-dot:hover {
+  background-color: #9ca3af;
+  transform: scale(1.25);
+}
+
+.case-dot.is-active {
+  background-color: #667eea;
+  transform: scale(1.3);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.25);
 }

@@ -77,39 +77,73 @@ $(document).ready(function() {
 
 
   const cases = Array.from(document.querySelectorAll('#cases-wrapper [data-case]'));
-  const prevBtn = document.getElementById('case-prev');
-  const nextBtn = document.getElementById('case-next');
-  const indicator = document.getElementById('case-indicator');
+  const dotsContainer = document.getElementById('cases-dots');
 
-  if (cases.length && prevBtn && nextBtn && indicator) {
+  if (cases.length && dotsContainer) {
     let idx = 0;
+    let animating = false;
+    var ANIM_DURATION = 400; // ms, must match CSS animation-duration
 
-    function render() {
-      // Pause all videos in all cases before switching
-      cases.forEach((caseEl) => {
-        const videos = caseEl.querySelectorAll('video');
-        videos.forEach(video => {
-          video.pause();
-        });
+    // Create dots
+    cases.forEach(function (_, i) {
+      const dot = document.createElement('span');
+      dot.classList.add('case-dot');
+      dot.setAttribute('data-index', i);
+      dot.addEventListener('click', function () {
+        if (animating || i === idx) return;
+        switchTo(i);
       });
+      dotsContainer.appendChild(dot);
+    });
 
-      // Toggle active class
-      cases.forEach((el, i) => el.classList.toggle('is-active', i === idx));
-      indicator.textContent = `Case ${idx + 1} / ${cases.length}`;
-      prevBtn.disabled = (cases.length <= 1);
-      nextBtn.disabled = (cases.length <= 1);
+    const dots = Array.from(dotsContainer.querySelectorAll('.case-dot'));
+
+    function clearAnimClasses(el) {
+      el.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-right', 'slide-out-left');
     }
 
-    prevBtn.addEventListener('click', function () {
-      idx = (idx - 1 + cases.length) % cases.length;
-      render();
-    });
+    function switchTo(newIdx) {
+      if (animating) return;
+      animating = true;
 
-    nextBtn.addEventListener('click', function () {
-      idx = (idx + 1) % cases.length;
-      render();
-    });
+      var oldIdx = idx;
+      var direction = newIdx > oldIdx ? 'left' : 'right'; // content slides left when going forward
+      var oldCase = cases[oldIdx];
+      var newCase = cases[newIdx];
 
-    render();
+      // Pause all videos
+      cases.forEach(function (caseEl) {
+        var videos = caseEl.querySelectorAll('video');
+        videos.forEach(function (video) { video.pause(); });
+      });
+
+      // Clear any leftover animation classes
+      cases.forEach(function (el) { clearAnimClasses(el); });
+
+      // Animate old case out
+      oldCase.classList.add(direction === 'left' ? 'slide-out-left' : 'slide-out-right');
+
+      // Animate new case in
+      newCase.classList.add(direction === 'left' ? 'slide-in-right' : 'slide-in-left');
+
+      // Update dots immediately
+      idx = newIdx;
+      dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === idx); });
+
+      // After animation ends, clean up
+      setTimeout(function () {
+        clearAnimClasses(oldCase);
+        oldCase.classList.remove('is-active');
+
+        clearAnimClasses(newCase);
+        newCase.classList.add('is-active');
+
+        animating = false;
+      }, ANIM_DURATION);
+    }
+
+    // Initial render (no animation)
+    cases.forEach(function (el, i) { el.classList.toggle('is-active', i === idx); });
+    dots.forEach(function (dot, i) { dot.classList.toggle('is-active', i === idx); });
   }
 });
