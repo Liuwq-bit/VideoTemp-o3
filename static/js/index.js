@@ -84,7 +84,19 @@ $(document).ready(function() {
     let animating = false;
     var ANIM_DURATION = 400; // ms, must match CSS animation-duration
 
-    // Dots are pre-rendered in HTML for fast display; just query and bindEvents
+    // If dots already exist in HTML, use them; otherwise create them dynamically
+    var existingDots = dotsContainer.querySelectorAll('.case-dot');
+    if (existingDots.length === 0) {
+      // Fallback: create dots dynamically if not pre-rendered in HTML
+      cases.forEach(function (_, i) {
+        var dot = document.createElement('span');
+        dot.classList.add('case-dot');
+        dot.setAttribute('data-index', i);
+        if (i === 0) dot.classList.add('is-active');
+        dotsContainer.appendChild(dot);
+      });
+    }
+
     const dots = Array.from(dotsContainer.querySelectorAll('.case-dot'));
 
     dots.forEach(function (dot, i) {
