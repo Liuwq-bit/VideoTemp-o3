@@ -340,8 +340,15 @@
   <div class="container is-widescreen">
     <h2 class="title is-3 has-text-centered">Cases</h2>
 
-    <!-- Dot indicators -->
-    <div class="cases-dots" id="cases-dots"></div>
+    <!-- Dot indicators (static for fast rendering) -->
+    <div class="cases-dots" id="cases-dots">
+      <span class="case-dot is-active" data-index="0"></span>
+      <span class="case-dot" data-index="1"></span>
+      <span class="case-dot" data-index="2"></span>
+      <span class="case-dot" data-index="3"></span>
+      <span class="case-dot" data-index="4"></span>
+      <span class="case-dot" data-index="5"></span>
+    </div>
 
     <!-- Cases wrapper -->
     <div id="cases-wrapper">

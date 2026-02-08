@@ -84,19 +84,15 @@ $(document).ready(function() {
     let animating = false;
     var ANIM_DURATION = 400; // ms, must match CSS animation-duration
 
-    // Create dots
-    cases.forEach(function (_, i) {
-      const dot = document.createElement('span');
-      dot.classList.add('case-dot');
-      dot.setAttribute('data-index', i);
+    // Dots are pre-rendered in HTML for fast display; just query and bindEvents
+    const dots = Array.from(dotsContainer.querySelectorAll('.case-dot'));
+
+    dots.forEach(function (dot, i) {
       dot.addEventListener('click', function () {
         if (animating || i === idx) return;
         switchTo(i);
       });
-      dotsContainer.appendChild(dot);
     });
-
-    const dots = Array.from(dotsContainer.querySelectorAll('.case-dot'));
 
     function clearAnimClasses(el) {
       el.classList.remove('slide-in-right', 'slide-in-left', 'slide-out-right', 'slide-out-left');
